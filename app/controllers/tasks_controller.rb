@@ -1,10 +1,10 @@
 class TasksController < ApplicationController
+    before_action :set_task, only: [:show, :edit, :update, :destroy]
     def index
         @tasks = Task.all
     end
     
     def show
-        @task = Task.find(params[:id])
     end
     
     def new
@@ -26,12 +26,9 @@ class TasksController < ApplicationController
     end
 
     def edit
-        @task = Task.find(params[:id])
     end
     
     def update
-        @task = Task.find(params[:id])
-        
         if @task.update(task_params)
             flash[:success] = "タスクは正常に更新されました"
             redirect_to @task
@@ -42,7 +39,6 @@ class TasksController < ApplicationController
     end
     
     def destroy
-        @task = Task.find(params[:id])
         @task.destroy
         
         flash[:success] =  "タスクは削除されました"
@@ -52,10 +48,14 @@ class TasksController < ApplicationController
 #privateは、それより下に示されたメソッドはアクションでなく、このクラス内でのみ使用することを明示している。
     private
     
+    def set_task
+        @task = Task.find(params[:id])
+    end
+    
     #Strong Parameter
     #パラメータを把握し、送信されたデータを精査しようとする（今回はcontentカラムだけが欲しいのでそれ以外はフィルターにかかる）
     def task_params
         #params.require(:task)で、taskモデルのフォームから得られるデータと指定。:permit(:content)で必要なカラムだけを選択
-        params.require(:task).permit(:content)
+        params.require(:task).permit(:content, :title)
     end
 end
