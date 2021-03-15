@@ -56,6 +56,6 @@ class TasksController < ApplicationController
     #パラメータを把握し、送信されたデータを精査しようとする（今回はcontentカラムだけが欲しいのでそれ以外はフィルターにかかる）
     def task_params
         #params.require(:task)で、taskモデルのフォームから得られるデータと指定。:permit(:content)で必要なカラムだけを選択
-        params.require(:task).permit(:content, :title)
+        params.require(:task).permit(:content, :status)
     end
 end
