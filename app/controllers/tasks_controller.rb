@@ -1,5 +1,4 @@
 class TasksController < ApplicationController
-    before_action :set_task, only: [:update, :destroy]
     before_action :require_user_logged_in
     before_action :correct_user, except: [:index, :new, :create]
     def index
@@ -42,10 +41,6 @@ class TasksController < ApplicationController
     
 #privateは、それより下に示されたメソッドはアクションでなく、このクラス内でのみ使用することを明示している。
     private
-    def set_task
-        @task = Task.find(params[:id])
-    end
-
     #Strong Parameter
     #パラメータを把握し、送信されたデータを精査しようとする（今回はcontentカラムだけが欲しいのでそれ以外はフィルターにかかる）
     def task_params
