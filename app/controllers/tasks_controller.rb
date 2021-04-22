@@ -9,7 +9,6 @@ class TasksController < ApplicationController
         @task = Task.find(params[:id])
     end
 
-
     def new
         @task = current_user.tasks.build
     end
@@ -26,6 +25,10 @@ class TasksController < ApplicationController
             flash.now[:danger] = "タスクが受理されませんでした"
             render :new
         end
+    end
+    
+    def edit
+        @task = Task.find(params[:id])
     end
 
     def update
