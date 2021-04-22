@@ -4,6 +4,11 @@ class TasksController < ApplicationController
     def index
         @tasks = current_user.tasks.order(id: :desc).page(params[:page]).per(15)
     end
+    
+    def show
+        @task = Task.find(params[:id])
+    end
+
 
     def new
         @task = current_user.tasks.build
