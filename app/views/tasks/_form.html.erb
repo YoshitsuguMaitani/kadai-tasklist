@@ -1,16 +1,7 @@
 <!--form_withで始まり、endで終わる。これはformタグと同様の役割だと考える。-->
 <!--local: true を抜かした場合、画面遷移しない通信になる。外部サイトへの通信に効果を発揮する。-->
 <%= form_with(model: task, local: true) do |f| %>
-
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-        <% task.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+ <%= render 'layouts/error_messages', model: f.object %>
 
  <%= f.label :status, "ステータス" %>
  <%= f.text_field :status %>
